@@ -13,4 +13,9 @@ public class colEntity {
     public void setData(int data) {
         this.data = data;
     }
+
+    public String toString()
+    {
+        return String.valueOf(data);
+    }
 }
