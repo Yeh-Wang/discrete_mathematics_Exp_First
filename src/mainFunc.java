@@ -1,7 +1,8 @@
 public class mainFunc {
 
     public static void main(String[] args){
-        System.out.println("sda");
+        proInterface pro = new proInterface();
+        pro.showPanel();
     }
 }
 

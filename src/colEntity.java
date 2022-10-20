@@ -1,9 +1,16 @@
 public class colEntity {
-    private char pr;
     private int data;
-    private char re;
+
     public colEntity()
     {
+        data=0;
+    }
 
+    public int getData() {
+        return data;
+    }
+
+    public void setData(int data) {
+        this.data = data;
     }
 }
