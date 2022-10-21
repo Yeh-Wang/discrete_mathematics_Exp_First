@@ -1,21 +1,11 @@
-public class colEntity {
-    private int data;
+public class colEntity {  //存储集合元素
+    private char data;
 
-    public colEntity()
-    {
-        data=0;
-    }
+    public colEntity() {data=0;}
 
-    public int getData() {
-        return data;
-    }
+    public char getData() {return data;}
 
-    public void setData(int data) {
-        this.data = data;
-    }
+    public void setData(char data) {this.data = data;}
 
-    public String toString()
-    {
-        return String.valueOf(data);
-    }
+    public String toString() {return String.valueOf(data);}
 }
