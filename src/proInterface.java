@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class proInterface {
@@ -11,31 +12,69 @@ public class proInterface {
         while (j < 99) {
             Scanner in = new Scanner(System.in);
             String gather;
-            System.out.println("请输入集合A:(格式为“<,>");   //输入A集合元素
+//输入A集合元素---------------------------------------------------------
+            System.out.println("请输入集合A:(格式为“<,>”)");
             gather = in.nextLine();
-            for (int i = 1; i < gather.length(); i = i + 2) {
+            int k=1;
+            for (int i = 1; i < gather.length(); i = i + 1) {
                 colEntity data1 = new colEntity();
-                data1.setData(gather.charAt(i));
-                A.add(data1);
+                if(gather.charAt(i)==','||gather.charAt(i)=='>'){
+                    data1.setData(gather.substring(k,i));
+                    k=i+1;
+                    A.add(data1);
+                }
             }
+//            for (colEntity entity : A) {      //输出所得到的所有元素
+//                System.out.println(entity.getData());
+//            }
+            k=1;
             in.reset();
-            System.out.println("请输入集合B:(格式为“<,>");  //输入B集合元素
+//输入A集合元素---------------------------------------------------------------
+            System.out.println("请输入集合B:(格式为“<,>”)");  //输入B集合元素
             gather = in.nextLine();
-            for (int i = 1; i < gather.length(); i = i + 2) {
+            for (int i = 1; i < gather.length(); i = i + 1) {
                 colEntity data2 = new colEntity();
-                data2.setData(gather.charAt(i));
-                B.add(data2);
+                if(gather.charAt(i)==','||gather.charAt(i)=='>'){
+                    data2.setData(gather.substring(k,i));
+                    k=i+1;
+                    B.add(data2);
+                }
             }
+//            for (colEntity colEntity : B) {     //输出所得到的所有元素
+//                System.out.println(colEntity.getData());
+//            }
+            k=2;
             in.reset();
-            System.out.println("请输入A到B的关系:(输入格式为序偶集)");  //输入两集合的一个关系
+//输入两集合的一个关系-------------------------------------------------------------------
+            System.out.println("请输入A到B的关系:(输入格式为序偶集)");
             gather = in.nextLine();
-            for (int i = 2; i < gather.length(); i = i + 6) {
-                binRelationEntity data = new binRelationEntity();
-                data.setOne(gather.charAt(i));
-                data.setTwo(gather.charAt(i+2));
-                BR.add(data);
+            for (int i=1;i<gather.length()-1;)
+            {
+                if(gather.charAt(i)=='>')
+                {
+                    String ch;
+                    ch=gather.substring(k,i+1);  //截取一个一个序偶元素
+                    binRelationEntity data = new binRelationEntity();
+                    int x=0;
+                    int e;
+                    for(e=0;e<ch.length();e++)
+                    {
+                        if(ch.charAt(e)==',')
+                        {
+                            data.setOne(ch.substring(x,e));
+                            break;
+                        }
+                    }
+                    data.setTwo(ch.substring(e+1,ch.length()-1));
+                    BR.add(data);
+                    i=i+2;
+                    k=i+1;
+                }else
+                    i++;
             }
-
+//            for (binRelationEntity binRelationEntity : BR) {  //输出所得到的所有序偶元素
+//                System.out.println(binRelationEntity);
+//            }
             System.out.print("集合<");
             for(int i=0;i<A.size()-1;i++)
             {
@@ -74,7 +113,7 @@ public class proInterface {
     }
 
     public boolean JudgeFun() {      //判断函数   Y:1 N:0
-        int i = 0;
+        int i;
         for (i = 0; i < A.size(); i++) {
             if (!JudgeExist(A.get(i).getData(),1) || !JudgeOnly(A.get(i).getData(),1))
                 break;
@@ -98,32 +137,32 @@ public class proInterface {
         return true;
     }
 
-    public boolean JudgeExist(int element,int col) {   //判断元素在BR中是否都存在  Y:1 N:0
-        int j = 0;
+    public boolean JudgeExist(String element,int col) {   //判断元素在BR中是否都存在  Y:1 N:0
+        int j;
         if(col==1){
             for (j = 0; j < BR.size(); j++) {
-                if (element == BR.get(j).getOne())
+                if (Objects.equals(element, BR.get(j).getOne()))
                     break;
             }
         }else {
             for (j = 0; j < BR.size(); j++) {
-                if (element == BR.get(j).getTwo())
+                if (Objects.equals(element, BR.get(j).getTwo()))
                     break;
             }
         }
         return j != BR.size();
     }
 
-    public boolean JudgeOnly(int element,int col) {  //判断元素在BR中是否唯一  Y:1 N:0
-        int j = 0, k = 0;
+    public boolean JudgeOnly(String element,int col) {  //判断元素在BR中是否唯一  Y:1 N:0
+        int j, k = 0;
         if(col==1){
             for (j = 0; j < BR.size(); j++) {
-                if (element == BR.get(j).getOne())
+                if (Objects.equals(element, BR.get(j).getOne()))
                     k++;
             }
         } else {
             for (j = 0; j < BR.size(); j++) {
-                if (element == BR.get(j).getTwo())
+                if (Objects.equals(element, BR.get(j).getTwo()))
                     k++;
             }
         }
