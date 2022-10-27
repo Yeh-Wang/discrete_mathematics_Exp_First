@@ -105,7 +105,10 @@ public class proInterface {
         }
     }
 
-    public boolean JudgeFun() {      //判断函数   Y:1 N:0
+    /**
+     * 判断函数 Y:1 N:0
+     */
+    public boolean JudgeFun() {
         int i;
         for (i = 0; i < A.size(); i++) {
             if (!JudgeBRElement())
@@ -116,7 +119,10 @@ public class proInterface {
         return i == A.size();
     }
 
-    public boolean JudgeIn() {  //判断入射  Y:1 N:0
+    /**
+     * 判断入射  Y:1 N:0
+     */
+    public boolean JudgeIn() {
         for (binRelationEntity binRelationEntity : BR) {
             if (!JudgeOnly(binRelationEntity.getTwo(), 2))
                 return false;
@@ -124,7 +130,10 @@ public class proInterface {
         return true;
     }
 
-    public boolean JudgeSu() {   //判断满射  Y:1 N:0
+    /**
+     * 判断满射  Y:1 N:0
+     */
+    public boolean JudgeSu() {
         for (colEntity colEntity : B) {
             if (!JudgeExist(colEntity.getData(), 2))
                 return false;
@@ -132,7 +141,13 @@ public class proInterface {
         return true;
     }
 
-    public boolean JudgeExist(String element, int col) {   //判断元素在BR中是否都存在  Y:1 N:0
+    /**
+     * 判断元素在BR中是否都存在  Y:1 N:0
+     *
+     * @param element The element to judge
+     * @param col A verdict flag for the collection type
+     */
+    public boolean JudgeExist(String element, int col) {
         int j;
         if (col == 1) {
             for (j = 0; j < BR.size(); j++) {
@@ -148,7 +163,10 @@ public class proInterface {
         return j != BR.size();
     }
 
-    public boolean JudgeBRElement()  //判断输入的序偶集中元素是否都在A，B集合中  Y:1 N:0
+    /**
+     * 判断输入的序偶集中元素是否都在A，B集合中  Y:1 N:0
+     */
+    public boolean JudgeBRElement()
     {
         boolean flag = true;
         int j, i;
@@ -173,7 +191,13 @@ public class proInterface {
         return flag;
     }
 
-    public boolean JudgeOnly(String element, int col) {  //判断元素在BR中是否唯一  Y:1 N:0
+    /**
+     * 判断元素在BR中是否唯一  Y:1 N:0
+     *
+     * @param element The element to judge
+     * @param col A verdict flag for the collection type
+     */
+    public boolean JudgeOnly(String element, int col) {
         int j, k = 0;
         if (col == 1) {
             for (j = 0; j < BR.size(); j++) {
